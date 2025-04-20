@@ -2,17 +2,31 @@ package main
 
 import (
 	"log"
-	"net/http"
 
-	"github.com/a-h/templ"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
-	mux := http.NewServeMux()
 
-	mux.Handle("GET /", templ.Handler(hello("htmx")))
+	// Echo instance
+	e := echo.New()
 
-	if err := http.ListenAndServe(":8080", mux); err != nil {
+	// Middleware
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	e.Static("/react", "react")
+	e.GET("/", index)
+	e.GET("/boom", func(ctx echo.Context) error {
+		return ctx.HTML(200, "<div>Kaboom!</div>")
+	})
+
+	if err := e.Start(":8080"); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func index(ctx echo.Context) error {
+	return hello("htmx").Render(ctx.Request().Context(), ctx.Response().Writer)
 }

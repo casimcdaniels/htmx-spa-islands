@@ -29,20 +29,7 @@ func hello(name string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div>Hello, ")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(name)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components.templ`, Line: 4, Col: 19}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "!</div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script><script type=\"importmap\">\n\t\t\t{\n\t\t\t\t\"imports\": {\n\t\t\t\t\t\"react\": \"https://esm.sh/react@19.1.0?dev\",\n\t\t\t\t\t\"react-dom\": \"https://esm.sh/react-dom@19.1.0?dev\",\n\t\t\t\t\t\"react-dom/client\": \"https://esm.sh/react-dom@19.1.0/client?dev\",\n\t\t\t\t\t\"react/jsx-runtime\": \"https://esm.sh/react@19.1.0/jsx-runtime?dev\"\n\t\t\t\t}\n\t\t\t}\n\t\t\t</script><script type=\"module\">\n\t\t\t\timport { Example } from \"/react/dist/example.js\"\n\t\t\t</script></head><body><button id=\"boom\" hx-get=\"/boom\" hx-target=\"body\" style=\"display:none;\" hidden=\"true\"></button> <the-example text=\"Click me\" callback=\"onCallback\"></the-example><div id=\"result\"></div><script>\n\t\t\t\tfunction onCallback() {\n\t\t\t\t\tdocument.getElementById('boom').click();\n\t\t\t\t}\n\t\t\t</script></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
